@@ -1,2 +1,2 @@
-web: gunicorn skills_extract:app
+web: gunicorn skills_extract:app --bind 0.0.0.0:$PORT
 

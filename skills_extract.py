@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pdfminer.high_level import extract_text
 from skills_master import SKILLS_MASTER
-import os
+
 
 app = Flask(__name__)
 CORS(app)
@@ -65,6 +65,4 @@ def extract_skills_api():
         return jsonify({"error": str(e)}), 500
 
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+

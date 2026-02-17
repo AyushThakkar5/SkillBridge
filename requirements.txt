@@ -1,5 +1,5 @@
 Flask
 flask-cors
-pdfminer.six
 docx2txt
 gunicorn
+pymupdf

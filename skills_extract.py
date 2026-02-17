@@ -3,7 +3,7 @@ import re
 import docx2txt
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from pdfminer.high_level import extract_text
+import fitz  # PyMuPDF
 from skills_master import SKILLS_MASTER
 
 
@@ -17,7 +17,11 @@ def get_text_from_file(file):
 
     if filename.endswith(".pdf"):
         pdf_bytes = file.read()
-        text = extract_text(io.BytesIO(pdf_bytes))
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+        text = ""
+
+        for page in doc:
+            text += page.get_text()
 
     elif filename.endswith(".docx"):
         text = docx2txt.process(file)
@@ -51,21 +55,21 @@ def extract_skills_api():
     if "resume" not in request.files:
         return jsonify({"error": "Upload file with key 'resume'"}), 400
     
-    return jsonify({"message": "API working"})
+    # return jsonify({"message": "API working"})
 
 
-    # file = request.files["resume"]
+    file = request.files["resume"]
 
-    # try:
-    #     text = get_text_from_file(file)
-    #     skills = extract_skills(text)
+    try:
+        text = get_text_from_file(file)
+        skills = extract_skills(text)
 
-    #     return jsonify({
-    #         "skills": skills
-    #     })
+        return jsonify({
+            "skills": skills
+        })
 
-    # except Exception as e:
-    #     return jsonify({"error": str(e)}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 

@@ -50,19 +50,22 @@ def extract_skills_api():
 
     if "resume" not in request.files:
         return jsonify({"error": "Upload file with key 'resume'"}), 400
+    
+    return jsonify({"message": "API working"})
 
-    file = request.files["resume"]
 
-    try:
-        text = get_text_from_file(file)
-        skills = extract_skills(text)
+    # file = request.files["resume"]
 
-        return jsonify({
-            "skills": skills
-        })
+    # try:
+    #     text = get_text_from_file(file)
+    #     skills = extract_skills(text)
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    #     return jsonify({
+    #         "skills": skills
+    #     })
+
+    # except Exception as e:
+    #     return jsonify({"error": str(e)}), 500
 
 
 

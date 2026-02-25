@@ -94,6 +94,7 @@ def match_skills():
             "cuid": candidate.get("uid"),
             "cid": candidate.get("cid"),
             "cskills": list(candidate_skills),
+            "jid": employer.get("jid"),
             "euid": employer.get("uid"),
             "eid": employer.get("eid"),
             "match_percentage": round(match_percentage, 2)

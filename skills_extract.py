@@ -91,11 +91,8 @@ def match_skills():
 
     if match_percentage >= 70:
         return jsonify({
-            "cuid": candidate.get("uid"),
             "cid": candidate.get("cid"),
-            "cskills": list(candidate_skills),
             "jid": employer.get("jid"),
-            "euid": employer.get("uid"),
             "eid": employer.get("eid"),
             "match_percentage": round(match_percentage, 2)
         })
